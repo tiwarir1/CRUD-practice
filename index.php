@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php 
+	include 'db.php';
+	$sql = "select * from tasks";
+	$rows = $db -> query($sql);
+
+
+ ?>
+
 <html>
 	<head>
 		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -8,7 +16,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="row">
+			<div class="row" style = "margin-top: 70px;">
 				<center><h1>Todo List</h1></center>
 				<div class = "col-md-10 col-md-offset-1">
 					<button type = "button" data-target = "#myModal" data-toggle = "modal" class = "btn btn-success">Add Task</button>
@@ -26,13 +34,13 @@
 					        <h4 class="modal-title">Add Task</h4>
 					      </div>
 					      <div class="modal-body">
-					      	<form>
+					      	<form method = "post" action = "add.php">
 					      		<div class="form-group">
 					      			<label>Task Name</label>
 					      			<input type = "text" required name = "task" class = "form-control">
 					      		</div>
 
-					      		<input type="submit" name="send" value="send" class="btn btn-success"> 
+					      		<input type="submit" name="send" value="Add task" class="btn btn-success"> 
 					      	</form>
 					      </div>
 					      <div class="modal-footer">
@@ -52,23 +60,15 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th scope="row">1</th>
-								<td class = "col-md-10">Mark</td>
-								<td><a href ="" class = "btn btn-success">Edit</a></td>
-								<td><a href ="" class = "btn btn-danger">Delete</a></td>
+								<?php while($row = $rows->fetch_assoc()):	?>
+								
+								<th scope="row"><?php echo $row['id'] ?></th>
+								<td class = "col-md-10"><?php echo $row['name'] ?></td>
+								<td><a href ="update.php?id=<?php echo $row['id']; ?>" class = "btn btn-success">Edit</a></td>
+								<td><a href ="delete.php?id=<?php echo $row['id']; ?>" class = "btn btn-danger">Delete</a></td>
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td><a href ="" class = "btn btn-success">Edit</a></td>
-								<td><a href ="" class = "btn btn-danger">Delete</a></td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td><a href ="" class = "btn btn-success">Edit</a></td>
-								<td><a href ="" class = "btn btn-danger">Delete</a></td>
-							</tr>
+							<?php endwhile; ?>
+							
 						</tbody>
 					</table>
 				</div>
