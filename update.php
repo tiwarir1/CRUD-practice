@@ -2,7 +2,7 @@
 
 <?php
 	include 'db.php';
-	$id = $_GET['id'];
+	$id = (int)$_GET['id'];
 	$sql = "select * from tasks where id = '$id'";
 	$rows = $db->query($sql);
 
