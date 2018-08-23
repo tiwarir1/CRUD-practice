@@ -8,8 +8,8 @@
 	$start = ($page > 1 ) ? ($page * $perPage) - $perPage : 0;
 
 	$sql = "select * from tasks limit ".$start.", ".$perPage." ";
-	echo $total = $db->query("select * from tasks")->num_rows;
-	echo $pages = ceil($total / $perPage);
+	$total = $db->query("select * from tasks")->num_rows;
+	$pages = ceil($total / $perPage);
 
 	$rows = $db -> query($sql);
 
@@ -29,7 +29,7 @@
 				<center><h1>Todo List</h1></center>
 				<div class = "col-md-10 col-md-offset-1">
 					<button type = "button" data-target = "#myModal" data-toggle = "modal" class = "btn btn-success">Add Task</button>
-					<button type = "button" class = "btn btn-default pull-right">Print</button>
+					<button type = "button" onclick = "print();" class = "btn btn-default pull-right">Print</button>
 					<hr><br>
 
 					<!-- Modal -->
@@ -60,7 +60,7 @@
 					  </div>
 					</div>
 
-					<table class="table">
+					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>Number#</th>

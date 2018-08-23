@@ -2,7 +2,7 @@
 include 'db.php';
 
 if (isset($_POST['send'])){
-	$name = $_POST['task']; /*the name that was in (input type = "text" required name = "task")  */ 
+	$name = htmlspecialchars($_POST['task']); /*the name that was in (input type = "text" required name = "task")  */ 
 
 	$sql = "insert into tasks (name) values ('$name')";
 

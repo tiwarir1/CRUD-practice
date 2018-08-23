@@ -9,7 +9,7 @@
 	$row = $rows->fetch_assoc();
 	
 	if(isset($_POST['send'])){
-	$task = $_POST['task'];	
+	$task = htmlspecialchars($_POST['task']);	
 	$sql1 = "update tasks set name = '$task' where id = '$id'";
 
 	$db->query($sql1);
@@ -38,7 +38,8 @@
 								<label>Task Name</label>
 								<input type = "text" required name = "task" value = "<?php echo $row['name']; ?>" class = "form-control">
 							</div>
-							<input type="submit" name="send" value="Update" class="btn btn-success">
+							<input type="submit" name="send" value="Update" class="btn btn-success">&nbsp;&nbsp;
+							<a href="index.php" class = "btn btn-warning">Back</a>
 						</form>
 					</div>
 				</div>
